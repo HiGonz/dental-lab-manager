@@ -5,6 +5,7 @@
 	import { getRoleLabel } from '$lib/utils';
 
 	$: user = $currentUser;
+	console.log("🚀 ~ user:", user)
 
 	onMount(async () => {
 		if (user) {

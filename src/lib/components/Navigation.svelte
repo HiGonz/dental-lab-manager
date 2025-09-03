@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import { currentUser } from '$lib/stores';
+	import { currentUser, sidebarOpen } from '$lib/stores';
 	import { getRoleLabel, getRoleColor } from '$lib/utils';
 	import { api } from '$lib/api';
-
-	export let sidebarOpen = false;
 
 	$: user = $currentUser;
 	$: currentPath = $page.url.pathname;
@@ -15,31 +13,31 @@
 
 	function getNavigationItems(role: string) {
 		const baseItems = [
-			{ name: 'Dashboard', href: '/dashboard', icon: 'home' },
-			{ name: 'Orders', href: '/orders', icon: 'clipboard' }
+		   { name: 'Inicio', href: '/dashboard', icon: 'home' },
+		   { name: 'Órdenes', href: '/orders', icon: 'clipboard' }
 		];
 
 		const roleSpecificItems = {
-			specialist: [
-				{ name: 'Patients', href: '/patients', icon: 'users' }
-			],
-			receptionist: [
-				{ name: 'Patients', href: '/patients', icon: 'users' },
-				{ name: 'Calendar', href: '/calendar', icon: 'calendar' }
-			],
-			manager: [
-				{ name: 'Calendar', href: '/calendar', icon: 'calendar' },
-				{ name: 'KPIs', href: '/kpis', icon: 'chart' }
-			],
-			technician: [
-				{ name: 'Calendar', href: '/calendar', icon: 'calendar' }
-			]
+		   specialist: [
+			   { name: 'Pacientes', href: '/patients', icon: 'users' }
+		   ],
+		   receptionist: [
+			   { name: 'Pacientes', href: '/patients', icon: 'users' },
+			   { name: 'Calendario', href: '/calendar', icon: 'calendar' }
+		   ],
+		   manager: [
+			   { name: 'Calendario', href: '/calendar', icon: 'calendar' },
+			   { name: 'Indicadores', href: '/kpis', icon: 'chart' }
+		   ],
+		   technician: [
+			   { name: 'Calendario', href: '/calendar', icon: 'calendar' }
+		   ]
 		};
 
 		return [
-			...baseItems,
-			...(roleSpecificItems[role as keyof typeof roleSpecificItems] || []),
-			{ name: 'Settings', href: '/settings', icon: 'settings' }
+		   ...baseItems,
+		   ...(roleSpecificItems[role as keyof typeof roleSpecificItems] || []),
+		   { name: 'Configuración', href: '/settings', icon: 'settings' }
 		];
 	}
 
@@ -74,26 +72,26 @@
 </script>
 
 <!-- Mobile sidebar backdrop -->
-{#if sidebarOpen}
+{#if $sidebarOpen}
 	<div class="fixed inset-0 z-40 lg:hidden">
 		<div 
 			class="fixed inset-0 bg-gray-600 bg-opacity-75" 
 			role="button"
 			tabindex="0"
-			on:click={() => sidebarOpen = false} 
-			on:keydown={(e) => { if (e.key === 'Escape' || e.key === 'Enter') sidebarOpen = false; }}
+			on:click={() => sidebarOpen.set(false)} 
+			on:keydown={(e) => { if (e.key === 'Escape' || e.key === 'Enter') sidebarOpen.set(false); }}
 		></div>
 	</div>
 {/if}
 
 <!-- Mobile sidebar -->
-<div class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:hidden {sidebarOpen ? 'translate-x-0' : '-translate-x-full'}">
+<div class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:hidden {$sidebarOpen ? 'translate-x-0' : '-translate-x-full'}">>
 	<div class="flex items-center justify-between h-16 px-4 border-b border-gray-200">
 		<span class="text-xl font-semibold text-gray-800">Lab Manager</span>
 		<button
 			type="button"
 			class="text-gray-500 hover:text-gray-700"
-			on:click={() => sidebarOpen = false}
+			on:click={() => sidebarOpen.set(false)}
 		>
 			<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -112,7 +110,7 @@
 								? 'bg-primary-100 text-primary-700'
 								: 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
 						}"
-						on:click={() => sidebarOpen = false}
+						on:click={() => sidebarOpen.set(false)}
 					>
 						<svg class="mr-3 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={getIconPath(item.icon)} />
@@ -136,7 +134,7 @@
 							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
 						</svg>
 					</div>
-					<span class="ml-2 text-xl font-semibold text-gray-800">Lab Manager</span>
+					<span class="ml-2 text-xl font-semibold text-gray-800">Administrador de Laboratorio</span>
 				</div>
 				
 				<nav class="mt-8 flex-1 px-4 space-y-2">
@@ -180,10 +178,10 @@
 							type="button"
 							class="ml-3 text-gray-400 hover:text-gray-600"
 							on:click={handleLogout}
-							title="Sign out"
+							title="Cerrar sesión"
 						>
 							<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+								 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
 							</svg>
 						</button>
 					</div>

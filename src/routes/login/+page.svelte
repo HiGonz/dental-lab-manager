@@ -13,7 +13,7 @@
 	const demoUsers = [
 		{ username: 'especialista1', name: 'Dr. María González', role: 'Specialist' },
 		{ username: 'recepcionista1', name: 'Ana Martínez', role: 'Receptionist' },
-		{ username: 'gerente1', name: 'Carlos Rodriguez', role: 'Branch Manager' },
+		{ username: 'gerente1', name: 'Carlos Rodriguez', role: 'manager' },
 		{ username: 'tecnico1', name: 'Luis Fernández', role: 'Lab Technician' }
 	];
 

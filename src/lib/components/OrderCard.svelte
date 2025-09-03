@@ -33,29 +33,29 @@
 			<span class="badge badge-{statusColor}">
 				{statusLabel}
 			</span>
-			{#if urgentTag}
-				<span class="badge badge-danger">
-					<svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.732 12.5C3.962 14.333 4.924 16 6.464 16z" />
-					</svg>
-					Urgent
-				</span>
-			{/if}
-			{#if isOverdue}
-				<span class="badge badge-danger">
-					<svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-					</svg>
-					Overdue
-				</span>
-			{:else if isDueSoon}
-				<span class="badge badge-warning">
-					<svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-					</svg>
-					Due Soon
-				</span>
-			{/if}
+			   {#if urgentTag}
+				   <span class="badge badge-danger">
+					   <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.732 12.5C3.962 14.333 4.924 16 6.464 16z" />
+					   </svg>
+					   Urgente
+				   </span>
+			   {/if}
+			   {#if isOverdue}
+				   <span class="badge badge-danger">
+					   <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+					   </svg>
+					   Atrasada
+				   </span>
+			   {:else if isDueSoon}
+				   <span class="badge badge-warning">
+					   <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+					   </svg>
+					   Próxima a vencer
+				   </span>
+			   {/if}
 		</div>
 		<div class="text-sm text-gray-500">
 			#{order.id.slice(-6)}
@@ -90,10 +90,10 @@
 	<!-- Progress bar for in-progress orders -->
 	{#if order.status === 'in_progress' && order.stages.length > 0}
 		<div class="mb-3">
-			<div class="flex justify-between text-xs text-gray-500 mb-1">
-				<span>Progress</span>
-				<span>{order.stages.filter(s => s.status === 'completed').length} / {order.stages.length}</span>
-			</div>
+			   <div class="flex justify-between text-xs text-gray-500 mb-1">
+				   <span>Progreso</span>
+				   <span>{order.stages.filter(s => s.status === 'completed').length} / {order.stages.length}</span>
+			   </div>
 			<div class="w-full bg-gray-200 rounded-full h-2">
 				<div 
 					class="bg-primary-600 h-2 rounded-full transition-all duration-300"
@@ -104,28 +104,28 @@
 	{/if}
 
 	<!-- Footer with dates -->
-	<div class="flex justify-between items-center text-xs text-gray-500 {compact ? 'mt-2' : 'mt-3'}">
-		<div class="flex flex-col">
-			<span>Created: {formatDate(order.createdAt)}</span>
-			{#if order.completedAt}
-				<span>Completed: {formatDate(order.completedAt)}</span>
-			{:else if order.approvedAt}
-				<span>Approved: {formatDate(order.approvedAt)}</span>
-			{/if}
-		</div>
-		<div class="flex flex-col text-right">
-			<span class="font-medium {isOverdue ? 'text-danger-600' : isDueSoon ? 'text-warning-600' : ''}">
-				Due: {formatDate(order.dueDate)}
-			</span>
-			{#if daysUntilDue >= 0}
-				<span class="{isDueSoon ? 'text-warning-600' : ''}">
-					{daysUntilDue} day{daysUntilDue !== 1 ? 's' : ''} left
-				</span>
-			{:else}
-				<span class="text-danger-600">
-					{Math.abs(daysUntilDue)} day{Math.abs(daysUntilDue) !== 1 ? 's' : ''} overdue
-				</span>
-			{/if}
-		</div>
-	</div>
+	   <div class="flex justify-between items-center text-xs text-gray-500 {compact ? 'mt-2' : 'mt-3'}">
+		   <div class="flex flex-col">
+			   <span>Creada: {formatDate(order.createdAt)}</span>
+			   {#if order.completedAt}
+				   <span>Completada: {formatDate(order.completedAt)}</span>
+			   {:else if order.approvedAt}
+				   <span>Aprobada: {formatDate(order.approvedAt)}</span>
+			   {/if}
+		   </div>
+		   <div class="flex flex-col text-right">
+			   <span class="font-medium {isOverdue ? 'text-danger-600' : isDueSoon ? 'text-warning-600' : ''}">
+				   Vence: {formatDate(order.dueDate)}
+			   </span>
+			   {#if daysUntilDue >= 0}
+				   <span class="{isDueSoon ? 'text-warning-600' : ''}">
+					   {daysUntilDue} día{daysUntilDue !== 1 ? 's' : ''} restante{daysUntilDue !== 1 ? 's' : ''}
+				   </span>
+			   {:else}
+				   <span class="text-danger-600">
+					   {Math.abs(daysUntilDue)} día{Math.abs(daysUntilDue) !== 1 ? 's' : ''} atrasada{Math.abs(daysUntilDue) !== 1 ? 's' : ''}
+				   </span>
+			   {/if}
+		   </div>
+	   </div>
 </div>

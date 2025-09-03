@@ -9,42 +9,42 @@
 
 	// Kanban columns configuration
 	const columns = [
-		{ 
-			id: 'pending', 
-			title: 'Pending Review',
-			color: 'warning',
-			description: 'Orders waiting for approval'
-		},
-		{ 
-			id: 'approved', 
-			title: 'Approved',
-			color: 'primary',
-			description: 'Orders ready for production'
-		},
-		{ 
-			id: 'in_progress', 
-			title: 'In Progress',
-			color: 'primary',
-			description: 'Orders being manufactured'
-		},
-		{ 
-			id: 'completed', 
-			title: 'Completed',
-			color: 'success',
-			description: 'Orders ready for delivery'
-		},
-		{ 
-			id: 'delivered', 
-			title: 'Delivered',
-			color: 'secondary',
-			description: 'Orders delivered to patients'
-		},
-		{ 
-			id: 'rejected', 
-			title: 'Rejected',
-			color: 'danger',
-			description: 'Orders that need revision'
-		}
+	   { 
+		   id: 'pending', 
+		   title: 'Pendiente de revisión',
+		   color: 'warning',
+		   description: 'Órdenes esperando aprobación'
+	   },
+	   { 
+		   id: 'approved', 
+		   title: 'Aprobada',
+		   color: 'primary',
+		   description: 'Órdenes listas para producción'
+	   },
+	   { 
+		   id: 'in_progress', 
+		   title: 'En proceso',
+		   color: 'primary',
+		   description: 'Órdenes en fabricación'
+	   },
+	   { 
+		   id: 'completed', 
+		   title: 'Completada',
+		   color: 'success',
+		   description: 'Órdenes listas para entrega'
+	   },
+	   { 
+		   id: 'delivered', 
+		   title: 'Entregada',
+		   color: 'secondary',
+		   description: 'Órdenes entregadas al paciente'
+	   },
+	   { 
+		   id: 'rejected', 
+		   title: 'Rechazada',
+		   color: 'danger',
+		   description: 'Órdenes que requieren revisión'
+	   }
 	];
 
 	// Group orders by status
@@ -156,41 +156,41 @@
 	{#if showFilters}
 		<div class="bg-white p-4 rounded-lg border border-gray-200 space-y-4">
 			<div class="flex flex-wrap items-center gap-4">
-				<div class="flex-1 min-w-64">
-					<input
-						type="text"
-						placeholder="Search orders, patients, or specialists..."
-						class="input w-full"
-						bind:value={searchQuery}
-					/>
-				</div>
-				<div class="flex items-center space-x-4">
-					<label class="flex items-center">
-						<input
-							type="checkbox"
-							class="rounded border-gray-300 text-primary-600 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
-							bind:checked={urgentOnly}
-						/>
-						<span class="ml-2 text-sm text-gray-700">Urgent only</span>
-					</label>
-					<label class="flex items-center">
-						<input
-							type="checkbox"
-							class="rounded border-gray-300 text-danger-600 shadow-sm focus:border-danger-300 focus:ring focus:ring-danger-200 focus:ring-opacity-50"
-							bind:checked={overdueOnly}
-						/>
-						<span class="ml-2 text-sm text-gray-700">Overdue only</span>
-					</label>
-					{#if searchQuery || urgentOnly || overdueOnly}
-						<button
-							type="button"
-							class="text-sm text-gray-500 hover:text-gray-700"
-							on:click={clearFilters}
-						>
-							Clear filters
-						</button>
-					{/if}
-				</div>
+				   <div class="flex-1 min-w-64">
+					   <input
+						   type="text"
+						   placeholder="Buscar órdenes, pacientes o especialistas..."
+						   class="input w-full"
+						   bind:value={searchQuery}
+					   />
+				   </div>
+				   <div class="flex items-center space-x-4">
+					   <label class="flex items-center">
+						   <input
+							   type="checkbox"
+							   class="rounded border-gray-300 text-primary-600 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+							   bind:checked={urgentOnly}
+						   />
+						   <span class="ml-2 text-sm text-gray-700">Solo urgentes</span>
+					   </label>
+					   <label class="flex items-center">
+						   <input
+							   type="checkbox"
+							   class="rounded border-gray-300 text-danger-600 shadow-sm focus:border-danger-300 focus:ring focus:ring-danger-200 focus:ring-opacity-50"
+							   bind:checked={overdueOnly}
+						   />
+						   <span class="ml-2 text-sm text-gray-700">Solo atrasadas</span>
+					   </label>
+					   {#if searchQuery || urgentOnly || overdueOnly}
+						   <button
+							   type="button"
+							   class="text-sm text-gray-500 hover:text-gray-700"
+							   on:click={clearFilters}
+						   >
+							   Limpiar filtros
+						   </button>
+					   {/if}
+				   </div>
 			</div>
 		</div>
 	{/if}
@@ -236,14 +236,14 @@
 							</div>
 						{/each}
 
-						{#if column.orders.length === 0}
-							<div class="text-center py-8 text-gray-400">
-								<svg class="mx-auto h-12 w-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-								</svg>
-								<p class="text-sm">No orders</p>
-							</div>
-						{/if}
+						   {#if column.orders.length === 0}
+							   <div class="text-center py-8 text-gray-400">
+								   <svg class="mx-auto h-12 w-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+								   </svg>
+								   <p class="text-sm">Sin órdenes</p>
+							   </div>
+						   {/if}
 					</div>
 				</div>
 			{/each}

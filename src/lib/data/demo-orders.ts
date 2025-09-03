@@ -2,41 +2,41 @@ import type { Order, OrderStage } from '../types';
 
 // Default order stages
 export const orderStages: OrderStage[] = [
-	{
-		id: '1',
-		name: 'Impression Review',
-		description: 'Review and validate dental impressions',
-		order: 1,
-		estimatedDays: 1
-	},
-	{
-		id: '2',
-		name: 'Model Creation',
-		description: 'Create dental model from impressions',
-		order: 2,
-		estimatedDays: 2
-	},
-	{
-		id: '3',
-		name: 'Design & Planning',
-		description: 'Design the dental prosthetic',
-		order: 3,
-		estimatedDays: 1
-	},
-	{
-		id: '4',
-		name: 'Manufacturing',
-		description: 'Manufacture the dental prosthetic',
-		order: 4,
-		estimatedDays: 2
-	},
-	{
-		id: '5',
-		name: 'Quality Control',
-		description: 'Final quality check and polishing',
-		order: 5,
-		estimatedDays: 1
-	}
+   {
+	   id: '1',
+	   name: 'Revisión de impresiones',
+	   description: 'Revisar y validar las impresiones dentales',
+	   order: 1,
+	   estimatedDays: 1
+   },
+   {
+	   id: '2',
+	   name: 'Creación de modelo',
+	   description: 'Crear el modelo dental a partir de las impresiones',
+	   order: 2,
+	   estimatedDays: 2
+   },
+   {
+	   id: '3',
+	   name: 'Diseño y planificación',
+	   description: 'Diseñar la prótesis dental',
+	   order: 3,
+	   estimatedDays: 1
+   },
+   {
+	   id: '4',
+	   name: 'Fabricación',
+	   description: 'Fabricar la prótesis dental',
+	   order: 4,
+	   estimatedDays: 2
+   },
+   {
+	   id: '5',
+	   name: 'Control de calidad',
+	   description: 'Revisión final de calidad y pulido',
+	   order: 5,
+	   estimatedDays: 1
+   }
 ];
 
 export const demoOrders: Order[] = [
@@ -46,11 +46,11 @@ export const demoOrders: Order[] = [
 		specialistId: '1',
 		technicianId: '4',
 		status: 'pending',
-		description: 'Crown restoration for upper molar #16',
+		description: 'Restauración de corona para molar superior #16',
 		urgentTag: false,
-		createdAt: new Date('2024-03-01T09:30:00'),
-		updatedAt: new Date('2024-03-01T09:30:00'),
-		dueDate: new Date('2024-03-08T17:00:00'),
+		createdAt: new Date('2025-08-31T09:30:00'), // hace 3 días
+		updatedAt: new Date('2025-08-31T09:30:00'),
+		dueDate: new Date('2025-09-04T17:00:00'), // mañana
 		stages: [
 			{
 				id: '1-1',
@@ -61,15 +61,15 @@ export const demoOrders: Order[] = [
 				completedAt: undefined
 			}
 		],
-		notes: [
-			{
-				id: '1-note-1',
-				orderId: '1',
-				userId: '1',
-				content: 'Patient presents with damaged crown on upper right molar. Requires full crown replacement.',
-				createdAt: new Date('2024-03-01T09:30:00')
-			}
-		],
+		   notes: [
+			   {
+				   id: '1-note-1',
+				   orderId: '1',
+				   userId: '1',
+				   content: 'El paciente presenta corona dañada en molar superior derecho. Requiere reemplazo total de corona.',
+				   createdAt: new Date('2024-03-01T09:30:00')
+			   }
+		   ],
 		version: 1
 	},
 	{
@@ -78,12 +78,12 @@ export const demoOrders: Order[] = [
 		specialistId: '5',
 		technicianId: '4',
 		status: 'approved',
-		description: 'Partial denture for lower jaw',
+		description: 'Prótesis parcial para mandíbula inferior',
 		urgentTag: true,
-		createdAt: new Date('2024-02-28T14:15:00'),
-		updatedAt: new Date('2024-03-01T10:00:00'),
-		approvedAt: new Date('2024-03-01T10:00:00'),
-		dueDate: new Date('2024-03-07T17:00:00'),
+		createdAt: new Date('2025-09-01T14:15:00'), // hace 2 días
+		updatedAt: new Date('2025-09-02T10:00:00'), // ayer
+		approvedAt: new Date('2025-09-02T10:00:00'),
+		dueDate: new Date('2025-09-05T17:00:00'), // en 2 días
 		stages: [
 			{
 				id: '2-1',
@@ -102,22 +102,22 @@ export const demoOrders: Order[] = [
 				completedAt: undefined
 			}
 		],
-		notes: [
-			{
-				id: '2-note-1',
-				orderId: '2',
-				userId: '5',
-				content: 'Urgent case - patient needs denture for important event next week.',
-				createdAt: new Date('2024-02-28T14:15:00')
-			},
-			{
-				id: '2-note-2',
-				orderId: '2',
-				userId: '3',
-				content: 'Approved for urgent processing. Fast-track this order.',
-				createdAt: new Date('2024-03-01T10:00:00')
-			}
-		],
+		   notes: [
+			   {
+				   id: '2-note-1',
+				   orderId: '2',
+				   userId: '5',
+				   content: 'Caso urgente - el paciente necesita la prótesis para evento importante la próxima semana.',
+				   createdAt: new Date('2024-02-28T14:15:00')
+			   },
+			   {
+				   id: '2-note-2',
+				   orderId: '2',
+				   userId: '3',
+				   content: 'Aprobado para procesamiento urgente. Priorizar esta orden.',
+				   createdAt: new Date('2024-03-01T10:00:00')
+			   }
+		   ],
 		version: 1
 	},
 	{
@@ -126,12 +126,12 @@ export const demoOrders: Order[] = [
 		specialistId: '1',
 		technicianId: '6',
 		status: 'in_progress',
-		description: 'Bridge restoration for teeth #14-16',
+		description: 'Restauración de puente para dientes #14-16',
 		urgentTag: false,
-		createdAt: new Date('2024-02-25T11:20:00'),
-		updatedAt: new Date('2024-03-02T14:30:00'),
-		approvedAt: new Date('2024-02-26T09:15:00'),
-		dueDate: new Date('2024-03-04T17:00:00'),
+		createdAt: new Date('2025-09-02T11:20:00'), // ayer
+		updatedAt: new Date('2025-09-03T14:30:00'), // hoy
+		approvedAt: new Date('2025-09-03T09:15:00'), // hoy
+		dueDate: new Date('2025-09-06T17:00:00'), // en 3 días
 		stages: [
 			{
 				id: '3-1',
@@ -166,22 +166,22 @@ export const demoOrders: Order[] = [
 				completedAt: undefined
 			}
 		],
-		notes: [
-			{
-				id: '3-note-1',
-				orderId: '3',
-				userId: '1',
-				content: 'Three-unit bridge replacement. Special attention to color matching.',
-				createdAt: new Date('2024-02-25T11:20:00')
-			},
-			{
-				id: '3-note-2',
-				orderId: '3',
-				userId: '6',
-				content: 'Model created successfully. Proceeding with design phase.',
-				createdAt: new Date('2024-02-28T17:30:00')
-			}
-		],
+		   notes: [
+			   {
+				   id: '3-note-1',
+				   orderId: '3',
+				   userId: '1',
+				   content: 'Reemplazo de puente de tres unidades. Atención especial a la coincidencia de color.',
+				   createdAt: new Date('2024-02-25T11:20:00')
+			   },
+			   {
+				   id: '3-note-2',
+				   orderId: '3',
+				   userId: '6',
+				   content: 'Modelo creado exitosamente. Procediendo a la fase de diseño.',
+				   createdAt: new Date('2024-02-28T17:30:00')
+			   }
+		   ],
 		version: 1
 	},
 	{
@@ -189,29 +189,29 @@ export const demoOrders: Order[] = [
 		patientId: '4',
 		specialistId: '5',
 		status: 'rejected',
-		description: 'Implant crown for tooth #25',
+		description: 'Corona sobre implante para diente #25',
 		urgentTag: false,
-		createdAt: new Date('2024-02-20T16:45:00'),
-		updatedAt: new Date('2024-02-21T11:30:00'),
-		rejectedAt: new Date('2024-02-21T11:30:00'),
-		dueDate: new Date('2024-02-27T17:00:00'),
+		createdAt: new Date('2025-09-03T16:45:00'), // hoy
+		updatedAt: new Date('2025-09-03T17:00:00'), // hoy
+		rejectedAt: new Date('2025-09-03T17:00:00'),
+		dueDate: new Date('2025-09-07T17:00:00'), // en 4 días
 		stages: [],
-		notes: [
-			{
-				id: '4-note-1',
-				orderId: '4',
-				userId: '5',
-				content: 'Implant crown for premolar area.',
-				createdAt: new Date('2024-02-20T16:45:00')
-			},
-			{
-				id: '4-note-2',
-				orderId: '4',
-				userId: '3',
-				content: 'Rejected - incomplete impressions. Please retake impressions before resubmitting.',
-				createdAt: new Date('2024-02-21T11:30:00')
-			}
-		],
+		   notes: [
+			   {
+				   id: '4-note-1',
+				   orderId: '4',
+				   userId: '5',
+				   content: 'Corona sobre implante en zona premolar.',
+				   createdAt: new Date('2024-02-20T16:45:00')
+			   },
+			   {
+				   id: '4-note-2',
+				   orderId: '4',
+				   userId: '3',
+				   content: 'Rechazada - impresiones incompletas. Por favor, tomar nuevas impresiones antes de reenviar.',
+				   createdAt: new Date('2024-02-21T11:30:00')
+			   }
+		   ],
 		version: 1
 	},
 	{
@@ -220,13 +220,13 @@ export const demoOrders: Order[] = [
 		specialistId: '1',
 		technicianId: '4',
 		status: 'completed',
-		description: 'Night guard for bruxism',
+		description: 'Férula nocturna para bruxismo',
 		urgentTag: false,
-		createdAt: new Date('2024-02-15T13:00:00'),
-		updatedAt: new Date('2024-02-22T16:00:00'),
-		approvedAt: new Date('2024-02-16T09:00:00'),
-		completedAt: new Date('2024-02-22T16:00:00'),
-		dueDate: new Date('2024-02-22T17:00:00'),
+		createdAt: new Date('2025-09-04T13:00:00'), // mañana
+		updatedAt: new Date('2025-09-05T16:00:00'), // en 2 días
+		approvedAt: new Date('2025-09-04T09:00:00'), // mañana
+		completedAt: new Date('2025-09-05T16:00:00'), // en 2 días
+		dueDate: new Date('2025-09-05T17:00:00'), // en 2 días
 		stages: [
 			{
 				id: '5-1',
@@ -269,22 +269,22 @@ export const demoOrders: Order[] = [
 				completedAt: new Date('2024-02-22T16:00:00')
 			}
 		],
-		notes: [
-			{
-				id: '5-note-1',
-				orderId: '5',
-				userId: '1',
-				content: 'Custom night guard for severe bruxism. Ensure proper thickness and comfort.',
-				createdAt: new Date('2024-02-15T13:00:00')
-			},
-			{
-				id: '5-note-2',
-				orderId: '5',
-				userId: '4',
-				content: 'Night guard completed. Ready for delivery.',
-				createdAt: new Date('2024-02-22T16:00:00')
-			}
-		],
+		   notes: [
+			   {
+				   id: '5-note-1',
+				   orderId: '5',
+				   userId: '1',
+				   content: 'Férula nocturna personalizada para bruxismo severo. Asegurar grosor y comodidad adecuados.',
+				   createdAt: new Date('2024-02-15T13:00:00')
+			   },
+			   {
+				   id: '5-note-2',
+				   orderId: '5',
+				   userId: '4',
+				   content: 'Férula nocturna terminada. Lista para entrega.',
+				   createdAt: new Date('2024-02-22T16:00:00')
+			   }
+		   ],
 		version: 1
 	},
 	{
@@ -293,14 +293,14 @@ export const demoOrders: Order[] = [
 		specialistId: '5',
 		technicianId: '6',
 		status: 'delivered',
-		description: 'Veneers for front teeth #11-13',
+		description: 'Carillas para dientes anteriores #11-13',
 		urgentTag: false,
-		createdAt: new Date('2024-02-01T10:30:00'),
-		updatedAt: new Date('2024-02-14T15:30:00'),
-		approvedAt: new Date('2024-02-02T11:00:00'),
-		completedAt: new Date('2024-02-12T17:00:00'),
-		deliveredAt: new Date('2024-02-14T15:30:00'),
-		dueDate: new Date('2024-02-08T17:00:00'),
+		createdAt: new Date('2025-09-05T10:30:00'), // en 2 días
+		updatedAt: new Date('2025-09-06T15:30:00'), // en 3 días
+		approvedAt: new Date('2025-09-05T11:00:00'), // en 2 días
+		completedAt: new Date('2025-09-06T17:00:00'), // en 3 días
+		deliveredAt: new Date('2025-09-07T15:30:00'), // en 4 días
+		dueDate: new Date('2025-09-07T17:00:00'), // en 4 días
 		stages: [
 			{
 				id: '6-1',
@@ -343,29 +343,29 @@ export const demoOrders: Order[] = [
 				completedAt: new Date('2024-02-12T17:00:00')
 			}
 		],
-		notes: [
-			{
-				id: '6-note-1',
-				orderId: '6',
-				userId: '5',
-				content: 'Porcelain veneers for aesthetic improvement. Color match to adjacent teeth.',
-				createdAt: new Date('2024-02-01T10:30:00')
-			},
-			{
-				id: '6-note-2',
-				orderId: '6',
-				userId: '6',
-				content: 'Veneers completed with excellent color match. Quality check passed.',
-				createdAt: new Date('2024-02-12T17:00:00')
-			},
-			{
-				id: '6-note-3',
-				orderId: '6',
-				userId: '2',
-				content: 'Veneers delivered to patient. Patient very satisfied with results.',
-				createdAt: new Date('2024-02-14T15:30:00')
-			}
-		],
+		   notes: [
+			   {
+				   id: '6-note-1',
+				   orderId: '6',
+				   userId: '5',
+				   content: 'Carillas de porcelana para mejora estética. Coincidencia de color con dientes adyacentes.',
+				   createdAt: new Date('2024-02-01T10:30:00')
+			   },
+			   {
+				   id: '6-note-2',
+				   orderId: '6',
+				   userId: '6',
+				   content: 'Carillas terminadas con excelente coincidencia de color. Control de calidad aprobado.',
+				   createdAt: new Date('2024-02-12T17:00:00')
+			   },
+			   {
+				   id: '6-note-3',
+				   orderId: '6',
+				   userId: '2',
+				   content: 'Carillas entregadas al paciente. Muy satisfecho con el resultado.',
+				   createdAt: new Date('2024-02-14T15:30:00')
+			   }
+		   ],
 		version: 1
 	}
 ];

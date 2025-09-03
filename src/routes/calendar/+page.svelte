@@ -1,0 +1,58 @@
+<script lang="ts">
+	import { currentUser } from '$lib/stores';
+
+	$: user = $currentUser;
+</script>
+
+<div class="p-6">
+	<!-- Header -->
+	<div class="mb-8">
+		<h1 class="text-2xl font-bold text-gray-900">Calendar</h1>
+		<p class="mt-1 text-sm text-gray-600">
+			View order timelines and production schedules
+		</p>
+	</div>
+
+	<!-- Coming Soon -->
+	<div class="card text-center py-12">
+		<svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+		</svg>
+		<h3 class="text-lg font-medium text-gray-900 mb-2">Calendar View Coming Soon</h3>
+		<p class="text-gray-600 max-w-md mx-auto">
+			The calendar view will show order timelines, production schedules, and delivery dates in an interactive calendar interface.
+		</p>
+		
+		<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+			<div class="text-center p-4 bg-gray-50 rounded-lg">
+				<div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+					<svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+					</svg>
+				</div>
+				<h4 class="font-medium text-gray-900 mb-1">Order Timelines</h4>
+				<p class="text-sm text-gray-600">Track order progress through each stage</p>
+			</div>
+			
+			<div class="text-center p-4 bg-gray-50 rounded-lg">
+				<div class="w-10 h-10 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-3">
+					<svg class="w-5 h-5 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+					</svg>
+				</div>
+				<h4 class="font-medium text-gray-900 mb-1">Production Schedule</h4>
+				<p class="text-sm text-gray-600">View lab production capacity and workload</p>
+			</div>
+			
+			<div class="text-center p-4 bg-gray-50 rounded-lg">
+				<div class="w-10 h-10 bg-warning-100 rounded-full flex items-center justify-center mx-auto mb-3">
+					<svg class="w-5 h-5 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+					</svg>
+				</div>
+				<h4 class="font-medium text-gray-900 mb-1">Due Dates</h4>
+				<p class="text-sm text-gray-600">Monitor approaching deadlines and overdue orders</p>
+			</div>
+		</div>
+	</div>
+</div>

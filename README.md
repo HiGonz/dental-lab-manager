@@ -1,1 +1,0 @@
-# dental-lab-manager

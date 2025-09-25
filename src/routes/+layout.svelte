@@ -54,9 +54,9 @@
 </script>
 
 
-<div class="h-full bg-gray-50">
+<div class="min-h-screen bg-gray-50">
    {#if shouldShowNavigation}
-	   <div class="flex h-full">
+	   <div class="flex min-h-screen">
 		   <!-- Navigation -->
 		   <Navigation />
 
@@ -78,7 +78,7 @@
 		   </div>
 
 		   <!-- Contenido principal -->
-		   <div class="flex-1 flex flex-col lg:ml-0">
+		   <div class="flex-1 flex flex-col lg:ml-0 min-h-screen">
 			   <main class="flex-1 pt-16 lg:pt-0">
 				   <slot />
 			   </main>
@@ -92,6 +92,10 @@
 
 <style>
 	:global(html, body) {
+		height: 100%;
+	}
+	
+	:global(#svelte) {
 		height: 100%;
 	}
 </style>

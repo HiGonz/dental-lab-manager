@@ -86,6 +86,25 @@ class ApiService {
 		return demoPatients;
 	}
 
+	async searchPatients(query: string): Promise<Patient[]> {
+		await delay(300); // Simulate API search delay
+		const { demoPatients } = await import('./data/demo-patients');
+		
+		if (query.length < 2) {
+			return [];
+		}
+		
+		// Filter patients based on query (name, email, or phone)
+		const filteredPatients = demoPatients.filter(patient => 
+			patient.name.toLowerCase().includes(query.toLowerCase()) ||
+			patient.email.toLowerCase().includes(query.toLowerCase()) ||
+			patient.phone.includes(query)
+		);
+		
+		// Limit results to prevent overwhelming the UI
+		return filteredPatients.slice(0, 10);
+	}
+
 	async getPatientById(id: string): Promise<Patient | null> {
 		await delay(400);
 		const patients = await this.getPatients();

@@ -196,8 +196,12 @@
 	{/if}
 
 	<!-- Kanban Board -->
-	<div class="overflow-x-auto">
-		<div class="flex space-x-6 min-w-max pb-4">
+	<div class="relative">
+		<!-- Indicador de scroll -->
+		<div class="absolute top-0 right-0 z-10 bg-gradient-to-l from-white via-white to-transparent w-8 h-full pointer-events-none lg:hidden"></div>
+		
+		<div class="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+			<div class="flex space-x-6 min-w-max pb-4" style="width: max-content;">
 			{#each filteredOrderCounts as column}
 				<div 
 					class="flex-shrink-0 w-80 bg-gray-50 rounded-lg p-4 {dragOverColumn === column.id ? 'ring-2 ring-primary-500 bg-primary-50' : ''}"
@@ -247,6 +251,7 @@
 					</div>
 				</div>
 			{/each}
+			</div>
 		</div>
 	</div>
 

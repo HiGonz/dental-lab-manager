@@ -20,6 +20,15 @@ export interface Patient {
 	createdAt: Date;
 }
 
+export interface Branch {
+	id: string;
+	name: string;
+	address: string;
+	phone: string;
+	email: string;
+	isActive: boolean;
+}
+
 export interface OrderStage {
 	id: string;
 	name: string;

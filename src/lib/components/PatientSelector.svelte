@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   import PatientAutocomplete from './PatientAutocomplete.svelte';
   import { demoUsers } from '$lib/data/demo-users';
   import { demoBranches } from '$lib/data/demo-branches';
+  import { currentUser } from '$lib/stores';
   import type { Patient } from '$lib/types';
 
   export let selectedPatient: Patient | null = null;
@@ -17,6 +18,23 @@
     'branch-change': string;
     'date-change': string;
   }>();
+
+  let user: any = null;
+
+  // Reactive statement para autoseleccionar especialista
+  $: if (user && user.role === 'specialist' && !specialistId) {
+    console.log('🩺 Autoseleccionando especialista:', user.name, 'ID:', user.id);
+    specialistId = user.id;
+    dispatch('specialist-change', specialistId);
+  }
+
+  onMount(() => {
+    const unsubscribe = currentUser.subscribe(value => {
+      user = value;
+    });
+
+    return unsubscribe;
+  });
 
   function handlePatientSelect(event: CustomEvent<Patient>) {
     selectedPatient = event.detail;
@@ -62,14 +80,23 @@
         id="specialist"
         bind:value={specialistId}
         on:change={handleSpecialistChange}
-        class="block w-full rounded-xl border-2 border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 bg-white p-4 text-gray-900 transition-all duration-200"
+        class="block w-full rounded-xl border-2 border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 bg-white p-4 text-gray-900 transition-all duration-200 {user && user.role === 'specialist' ? 'opacity-75 cursor-not-allowed bg-gray-100' : ''}"
         required
+        disabled={user && user.role === 'specialist'}
       >
         <option value="">Seleccione un especialista</option>
-        {#each demoUsers as user}
-          <option value={user.id}>{user.name}</option>
+        {#each demoUsers as demoUser}
+          <option value={demoUser.id}>{demoUser.name}</option>
         {/each}
       </select>
+      {#if user && user.role === 'specialist' && specialistId === user.id}
+        <p class="text-sm text-blue-600 mt-1">
+          <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Autoseleccionado como especialista activo
+        </p>
+      {/if}
     </div>
 
     <!-- Paciente -->

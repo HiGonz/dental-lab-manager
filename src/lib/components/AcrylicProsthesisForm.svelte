@@ -34,6 +34,9 @@
     { id: 'terminado', label: 'Trabajo Terminado' }
   ];
 
+  // Show color selection only when "Prueba de Dientes" is selected
+  $: showColorSelection = formData.action === 'prueba-dientes';
+
   function handlePatientChange(event: CustomEvent<Patient | null>) {
     selectedPatient = event.detail;
     formData.patientId = selectedPatient?.id || '';
@@ -55,6 +58,12 @@
     // Validate required fields
     if (!formData.specialistId || !selectedPatient || !formData.branchId) {
       alert('Por favor complete todos los campos requeridos');
+      return;
+    }
+
+    // Validate color when "Prueba de Dientes" is selected
+    if (formData.action === 'prueba-dientes' && !formData.color) {
+      alert('Por favor seleccione un color para la prueba de dientes');
       return;
     }
 
@@ -94,6 +103,33 @@
       on:date-change={handleDateChange}
     />
 
+    <!-- Acciones/Proceso -->
+    <div class="bg-gradient-to-r from-emerald-50 to-teal-50 p-8 rounded-2xl border border-emerald-100">
+      <div class="flex items-center mb-6">
+        <div class="flex items-center justify-center w-10 h-10 bg-emerald-600 rounded-xl mr-4">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+          </svg>
+        </div>
+        <h3 class="text-2xl font-semibold text-gray-900">Proceso a Realizar</h3>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {#each actions as action}
+          <label class="group relative flex items-center p-4 bg-white rounded-xl border-2 border-gray-200 hover:border-emerald-300 cursor-pointer transition-colors duration-150 select-none {formData.action === action.id ? 'border-emerald-400 bg-emerald-50' : ''}">
+            <input 
+              type="radio" 
+              bind:group={formData.action}
+              value={action.id}
+              class="w-5 h-5 border-gray-300 text-emerald-600 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
+              required
+            >
+            <span class="ml-4 text-gray-900 font-medium">{action.label}</span>
+          </label>
+        {/each}
+      </div>
+    </div>
+    
     <!-- Especificaciones del Trabajo -->
     <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-8 rounded-2xl border border-purple-100">
       <div class="flex items-center mb-6">
@@ -135,50 +171,24 @@
           </div>
         </div>
 
-        <!-- Color -->
-        <div class="space-y-4">
-          <label for="color" class="block text-sm font-semibold text-gray-700">
-            Color *
-          </label>
-          <select 
-            id="color"
-            bind:value={formData.color}
-            class="block w-full rounded-xl border-2 border-gray-200 shadow-sm focus:border-purple-500 focus:ring-purple-500 bg-white p-4 text-gray-900 transition-all duration-200"
-            required
-          >
-            {#each colors as color}
-              <option value={color}>{color}</option>
-            {/each}
-          </select>
-          <p class="text-sm text-gray-500 mt-2">Seleccione el color según la carta de colores</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Acciones/Proceso -->
-    <div class="bg-gradient-to-r from-emerald-50 to-teal-50 p-8 rounded-2xl border border-emerald-100">
-      <div class="flex items-center mb-6">
-        <div class="flex items-center justify-center w-10 h-10 bg-emerald-600 rounded-xl mr-4">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-          </svg>
-        </div>
-        <h3 class="text-2xl font-semibold text-gray-900">Proceso a Realizar</h3>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {#each actions as action}
-          <label class="group relative flex items-center p-4 bg-white rounded-xl border-2 border-gray-200 hover:border-emerald-300 cursor-pointer transition-colors duration-150 select-none {formData.action === action.id ? 'border-emerald-400 bg-emerald-50' : ''}">
-            <input 
-              type="radio" 
-              bind:group={formData.action}
-              value={action.id}
-              class="w-5 h-5 border-gray-300 text-emerald-600 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
-              required
+        <!-- Color (solo cuando se selecciona "Prueba de Dientes") -->
+        {#if showColorSelection}
+          <div class="space-y-4">
+            <label for="color" class="block text-sm font-semibold text-gray-700">
+              Color *
+            </label>
+            <select 
+              id="color"
+              bind:value={formData.color}
+              class="block w-full rounded-xl border-2 border-gray-200 shadow-sm focus:border-purple-500 focus:ring-purple-500 bg-white p-4 text-gray-900 transition-all duration-200"
             >
-            <span class="ml-4 text-gray-900 font-medium">{action.label}</span>
-          </label>
-        {/each}
+              {#each colors as color}
+                <option value={color}>{color}</option>
+              {/each}
+            </select>
+            <p class="text-sm text-gray-500 mt-2">Seleccione el color según la carta de colores</p>
+          </div>
+        {/if}
       </div>
     </div>
 

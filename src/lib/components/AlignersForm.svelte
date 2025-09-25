@@ -19,9 +19,11 @@
 
   let selectedPatient: Patient | null = null;
 
-  function handlePatientChange(event: CustomEvent<Patient>) {
+  function handlePatientChange(event: CustomEvent<Patient | null>) {
     selectedPatient = event.detail;
-    formData.patientId = event.detail.id;
+    if (event.detail) {
+      formData.patientId = event.detail.id;
+    }
   }
 
   function handleSpecialistChange(event: CustomEvent<string>) {

@@ -7,6 +7,7 @@
   import AcrylicProsthesisForm from '$lib/components/AcrylicProsthesisForm.svelte';
   import FixedProsthesisForm from '$lib/components/FixedProsthesisForm.svelte';
   import AlignersForm from '$lib/components/AlignersForm.svelte';
+  import OrthodonticAppliancesForm from '$lib/components/OrthodonticAppliancesForm.svelte';
   import type { Patient } from '$lib/types';
 
   let selectedOrderType: string = '';
@@ -31,10 +32,10 @@
     patientId: '',
     branchId: '',
     date: new Date().toISOString().split('T')[0],
-    sentItems: [],
+    sentItems: [] as string[],
     color: '',
     material: 'zirconia',
-    teeth: [],
+    teeth: [] as string[],
     category: 'corona'
   };
 
@@ -48,10 +49,32 @@
     specifications: ''
   };
 
+  // Form data for Aparatos de Ortodoncia
+  let orthodonticForm = {
+    specialistId: '',
+    patientId: '',
+    branchId: '',
+    date: new Date().toISOString().split('T')[0],
+    hawleySuper: false,
+    hawleyInfer: false,
+    essixSuper: false,
+    essixInfer: false,
+    banda: false,
+    hyrax: false,
+    pma: false,
+    atp: false,
+    botonNance: false,
+    trampaRejilla: false,
+    trampaPicos: false,
+    teeth: '',
+    specifications: ''
+  };
+
   // Patient selection
   let selectedPatient: Patient | null = null;
   let selectedPatientFixed: Patient | null = null;
   let selectedPatientAligners: Patient | null = null;
+  let selectedPatientOrthodontic: Patient | null = null;
 
   onMount(() => {
     // Check if user is logged in
@@ -118,6 +141,19 @@
     goto('/orders');
   }
 
+  function handleOrthodonticSubmit(event: CustomEvent<typeof orthodonticForm>) {
+    const formData = event.detail;
+    
+    console.log('Formulario de Aparatos de Ortodoncia:', {
+      ...formData,
+      selectedPatientOrthodontic
+    });
+    
+    // TODO: Send to API
+    alert('Orden de Aparatos de Ortodoncia creada exitosamente');
+    goto('/orders');
+  }
+
   function handleBack() {
     selectedOrderType = '';
     showForm = false;
@@ -137,10 +173,10 @@
       patientId: '',
       branchId: '',
       date: new Date().toISOString().split('T')[0],
-      sentItems: [],
+      sentItems: [] as string[],
       color: '',
       material: 'zirconia',
-      teeth: [],
+      teeth: [] as string[],
       category: 'corona'
     };
     alignersForm = {
@@ -151,9 +187,29 @@
       digitalScan: false,
       specifications: ''
     };
+    orthodonticForm = {
+      specialistId: '',
+      patientId: '',
+      branchId: '',
+      date: new Date().toISOString().split('T')[0],
+      hawleySuper: false,
+      hawleyInfer: false,
+      essixSuper: false,
+      essixInfer: false,
+      banda: false,
+      hyrax: false,
+      pma: false,
+      atp: false,
+      botonNance: false,
+      trampaRejilla: false,
+      trampaPicos: false,
+      teeth: '',
+      specifications: ''
+    };
     selectedPatient = null;
     selectedPatientFixed = null;
     selectedPatientAligners = null;
+    selectedPatientOrthodontic = null;
   }
 </script>
 
@@ -196,47 +252,17 @@
       <!-- Aligners Form -->
       <AlignersForm 
         bind:formData={alignersForm}
-        bind:selectedPatient={selectedPatientAligners}
         on:submit={handleAlignersSubmit}
         on:back={handleBack}
       />
       
     {:else if selectedOrderType === 'orthodontic-appliances'}
       <!-- Orthodontic Appliances Form -->
-      <div class="space-y-8">
-        <div class="text-center border-b border-gray-200 pb-6">
-          <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl mb-4">
-            <span class="text-3xl">🔧</span>
-          </div>
-          <h2 class="text-3xl font-bold bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">
-            Aparatos de Ortodoncia
-          </h2>
-          <p class="text-gray-600 mt-2">Esta funcionalidad estará disponible próximamente</p>
-        </div>
-        
-        <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center">
-          <div class="mb-6">
-            <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-            </svg>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Próximamente</h3>
-            <p class="text-gray-600">El formulario para aparatos de ortodoncia se implementará en una próxima actualización.</p>
-          </div>
-          
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              type="button"
-              on:click={handleBack}
-              class="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-300 rounded-xl text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 transition-all duration-200"
-            >
-              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-              </svg>
-              Regresar
-            </button>
-          </div>
-        </div>
-      </div>
+      <OrthodonticAppliancesForm 
+        bind:formData={orthodonticForm}
+        on:submit={handleOrthodonticSubmit}
+        on:back={handleBack}
+      />
     {/if}
   </div>
 </div>

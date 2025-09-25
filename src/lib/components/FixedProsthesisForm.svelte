@@ -9,10 +9,10 @@
     patientId: '',
     branchId: '',
     date: new Date().toISOString().split('T')[0],
-    sentItems: [],
+    sentItems: [] as string[],
     color: '',
     material: 'zirconia',
-    teeth: [],
+    teeth: [] as string[],
     category: 'corona'
   };
   export let selectedPatient: Patient | null = null;

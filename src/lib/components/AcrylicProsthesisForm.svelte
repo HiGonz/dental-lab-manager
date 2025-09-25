@@ -29,7 +29,8 @@
   // Available actions/processes
   const actions = [
     { id: 'cucharillas', label: 'Toma de Cucharillas' },
-    { id: 'prueba', label: 'Prueba de Oclusión' },
+    { id: 'prueba-altura', label: 'Prueba de Altura' },
+    { id: 'prueba-dientes', label: 'Prueba de Dientes' },
     { id: 'terminado', label: 'Trabajo Terminado' }
   ];
 

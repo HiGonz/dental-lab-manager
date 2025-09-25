@@ -12,6 +12,10 @@
     hawleyInfer: false,
     essixSuper: false,
     essixInfer: false,
+    funcionalSuper: false,
+    funcionalInfer: false,
+    pistasPlanasSuper: false,
+    pistasPlanasInfer: false,
     banda: false,
     hyrax: false,
     pma: false,
@@ -31,7 +35,7 @@
   let selectedPatient: Patient | null = null;
 
   // Aparatos que requieren especificaciones
-  $: requiresSpecifications = formData.banda || formData.atp || formData.trampaRejilla || formData.trampaPicos;
+  $: requiresSpecifications = formData.banda || formData.atp || formData.trampaRejilla || formData.trampaPicos || formData.hyrax || formData.pma;
   
   // Solo Banda requiere especificación de dientes
   $: requiresTeeth = formData.banda;
@@ -64,6 +68,8 @@
     // Verificar que se haya seleccionado al menos un aparato
     const hasSelectedAppliance = formData.hawleySuper || formData.hawleyInfer || 
                                 formData.essixSuper || formData.essixInfer || 
+                                formData.funcionalSuper || formData.funcionalInfer ||
+                                formData.pistasPlanasSuper || formData.pistasPlanasInfer ||
                                 formData.banda || formData.hyrax || formData.pma || 
                                 formData.atp || formData.botonNance || 
                                 formData.trampaRejilla || formData.trampaPicos;
@@ -128,7 +134,7 @@
         <h3 class="text-2xl font-semibold text-gray-900">Aparatos de Ortodoncia *</h3>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Guardas Hawley -->
         <div class="space-y-3">
           <h4 class="text-lg font-semibold text-gray-800">Guarda Hawley</h4>
@@ -179,7 +185,59 @@
           </label>
         </div>
 
-        <!-- Otros Aparatos -->
+        <!-- Guarda Funcional -->
+        <div class="space-y-3">
+          <h4 class="text-lg font-semibold text-gray-800">Guarda Funcional</h4>
+          <label class="group relative flex items-center p-4 bg-white rounded-xl border-2 border-gray-200 hover:border-purple-300 cursor-pointer transition-colors duration-150 select-none">
+            <input 
+              type="checkbox" 
+              bind:checked={formData.funcionalSuper}
+              class="w-5 h-5 rounded border-gray-300 text-purple-600 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+            >
+            <div class="ml-4">
+              <span class="text-gray-900 font-medium">Superior</span>
+            </div>
+          </label>
+          <label class="group relative flex items-center p-4 bg-white rounded-xl border-2 border-gray-200 hover:border-purple-300 cursor-pointer transition-colors duration-150 select-none">
+            <input 
+              type="checkbox" 
+              bind:checked={formData.funcionalInfer}
+              class="w-5 h-5 rounded border-gray-300 text-purple-600 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+            >
+            <div class="ml-4">
+              <span class="text-gray-900 font-medium">Inferior</span>
+            </div>
+          </label>
+        </div>
+
+        <!-- Guarda Pistas Planas -->
+        <div class="space-y-3">
+          <h4 class="text-lg font-semibold text-gray-800">Guarda Pistas Planas</h4>
+          <label class="group relative flex items-center p-4 bg-white rounded-xl border-2 border-gray-200 hover:border-purple-300 cursor-pointer transition-colors duration-150 select-none">
+            <input 
+              type="checkbox" 
+              bind:checked={formData.pistasPlanasSuper}
+              class="w-5 h-5 rounded border-gray-300 text-purple-600 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+            >
+            <div class="ml-4">
+              <span class="text-gray-900 font-medium">Superior</span>
+            </div>
+          </label>
+          <label class="group relative flex items-center p-4 bg-white rounded-xl border-2 border-gray-200 hover:border-purple-300 cursor-pointer transition-colors duration-150 select-none">
+            <input 
+              type="checkbox" 
+              bind:checked={formData.pistasPlanasInfer}
+              class="w-5 h-5 rounded border-gray-300 text-purple-600 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+            >
+            <div class="ml-4">
+              <span class="text-gray-900 font-medium">Inferior</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Segunda fila - Otros Aparatos -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         <div class="space-y-3">
           <h4 class="text-lg font-semibold text-gray-800">Otros Aparatos</h4>
           
@@ -203,6 +261,7 @@
             >
             <div class="ml-4">
               <span class="text-gray-900 font-medium">Hyrax</span>
+              <p class="text-xs text-gray-500">Puede requerir especificaciones</p>
             </div>
           </label>
 
@@ -214,6 +273,7 @@
             >
             <div class="ml-4">
               <span class="text-gray-900 font-medium">PMA</span>
+              <p class="text-xs text-gray-500">Puede requerir especificaciones</p>
             </div>
           </label>
 
@@ -225,6 +285,7 @@
             >
             <div class="ml-4">
               <span class="text-gray-900 font-medium">ATP</span>
+              <p class="text-xs text-gray-500">Puede requerir especificaciones</p>
             </div>
           </label>
 

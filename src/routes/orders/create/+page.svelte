@@ -36,7 +36,8 @@
     color: '',
     material: 'zirconia',
     teeth: [] as string[],
-    category: 'corona'
+    category: 'corona',
+    digitalScan: false
   };
 
   // Form data for Alineadores
@@ -59,6 +60,10 @@
     hawleyInfer: false,
     essixSuper: false,
     essixInfer: false,
+    funcionalSuper: false,
+    funcionalInfer: false,
+    pistasPlanasSuper: false,
+    pistasPlanasInfer: false,
     banda: false,
     hyrax: false,
     pma: false,
@@ -177,7 +182,8 @@
       color: '',
       material: 'zirconia',
       teeth: [] as string[],
-      category: 'corona'
+      category: 'corona',
+      digitalScan: false
     };
     alignersForm = {
       specialistId: '',
@@ -196,6 +202,10 @@
       hawleyInfer: false,
       essixSuper: false,
       essixInfer: false,
+      funcionalSuper: false,
+      funcionalInfer: false,
+      pistasPlanasSuper: false,
+      pistasPlanasInfer: false,
       banda: false,
       hyrax: false,
       pma: false,

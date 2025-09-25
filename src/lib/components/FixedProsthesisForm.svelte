@@ -13,7 +13,8 @@
     color: '',
     material: 'zirconia',
     teeth: [] as string[],
-    category: 'corona'
+    category: 'corona',
+    digitalScan: false
   };
   export let selectedPatient: Patient | null = null;
 
@@ -29,15 +30,14 @@
     { id: 'registro-mordida', label: 'Registro de Mordida', description: 'Registro oclusal en cera o silicona' },
     { id: 'color-referencia', label: 'Referencia de Color', description: 'Muestra de color del paciente' },
     { id: 'radiografias', label: 'Radiografías', description: 'Radiografías periapicales o panorámica' },
-    { id: 'fotos-clinicas', label: 'Fotos Clínicas', description: 'Fotografías intraorales del caso' }
+    { id: 'fotos-clinicas', label: 'Fotos Clínicas', description: 'Fotografías intraorales del caso' },
+    { id: 'escaneo-digital', label: 'Escaneo Digital', description: 'Impresión digital intraoral' }
   ];
 
   // Material options
   const materials = [
     { id: 'zirconia', label: 'Zirconio', description: 'Alta resistencia y estética' },
-    { id: 'disilicate', label: 'Disilicato de Litio', description: 'Excelente estética y translucidez' },
-    { id: 'metal-ceramic', label: 'Cerámica sobre Metal', description: 'Resistente y económica' },
-    { id: 'composite', label: 'Composite', description: 'Reparaciones y carillas directas' }
+    { id: 'disilicate', label: 'Disilicato de Litio', description: 'Excelente estética y translucidez' }
   ];
 
   // Category options

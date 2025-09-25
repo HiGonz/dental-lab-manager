@@ -134,7 +134,7 @@
     <div>
       <div class="text-sm font-medium text-gray-700 mb-3 text-center">Maxilar Inferior</div>
       <div class="flex justify-center space-x-1">
-        {#each dentalChart.adult.slice(16, 24).reverse() as tooth (tooth.number)}
+        {#each dentalChart.adult.slice(16, 24) as tooth (tooth.number)}
           <button
             type="button"
             on:click={() => toggleTooth(tooth.number)}
@@ -145,7 +145,7 @@
           </button>
         {/each}
         <div class="w-4"></div>
-        {#each dentalChart.adult.slice(24, 32).reverse() as tooth (tooth.number)}
+        {#each dentalChart.adult.slice(24, 32) as tooth (tooth.number)}
           <button
             type="button"
             on:click={() => toggleTooth(tooth.number)}
